@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 07:14:11 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/20 23:46:44 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,34 @@ int		print_nstr(const char *str, int n)
 	}
 }
 
-int		print_int(va_list *args)
+int		print_int(va_list *args, t_param *p)
 {
 	char	*str;
 	int		ret;
 
-	str = ft_itoa(va_arg(*args, int));
+	if (p->lgt == 'l')
+		str = ft_ltoa(va_arg(*args, long));
+	else if (p->lgt == 'L')
+		str = ft_lltoa(va_arg(*args, long long));
+	else
+		str = ft_itoa(va_arg(*args, int));
 	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
 	return (ret);
 }
 
-int		print_uint(va_list *args)
+int		print_uint(va_list *args, t_param *p)
 {
 	char	*str;
 	int		ret;
 
-	str = ft_uitoa(va_arg(*args, unsigned int));
+	if (p->lgt == 'l')
+		str = ft_ultoa(va_arg(*args, unsigned long));
+	else if (p->lgt == 'L')
+		str = ft_ulltoa(va_arg(*args, unsigned long long));
+	else
+		str = ft_uitoa(va_arg(*args, unsigned int));
 	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
@@ -74,11 +84,13 @@ int		print_ulong(va_list *args)
 	return (ret);
 }
 
-int		print_str(va_list *args)
+int		print_str(va_list *args, t_param *p)
 {
 	char	*str;
 	int		ret;
 
+	if (p->lgt == 'l')
+		return (print_utfstr(args));
 	str = va_arg(*args, char *);
 	if (!str)
 	{
@@ -103,44 +115,56 @@ int		print_ptr(va_list *args)
 	return (ret);
 }
 
-int		print_hexa_uint(va_list *args, int upper)
+int		print_hexa_uint(va_list *args, int upper, t_param *p)
 {
 	char	*str;
 	int		ret;
 
-	str = ft_uitoa_base(va_arg(*args, int), 16, upper);
+	if (p->lgt == 'l')
+		str = ft_ultoa_base(va_arg(*args, unsigned long), 16, upper);
+	else if (p->lgt == 'L')
+		str = ft_ulltoa_base(va_arg(*args, unsigned long long), 16, upper);
+	else
+		str = ft_uitoa_base(va_arg(*args, unsigned int), 16, upper);
 	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
 	return (ret);
 }
 
-int		print_octal_int(va_list *args)
+int		print_octal_uint(va_list *args, t_param *p)
 {
 	char	*str;
 	int		ret;
 
-	str = ft_itoa_base(va_arg(*args, int), 8, 0);
+	if (p->lgt == 'l')
+		str = ft_ultoa_base(va_arg(*args, unsigned long), 8, 0);
+	else if (p->lgt == 'L')
+		str = ft_ulltoa_base(va_arg(*args, unsigned long long), 8, 0);
+	else
+		str = ft_uitoa_base(va_arg(*args, unsigned int), 8, 0);
 	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
 	return (ret);
 }
 
-int		print_octal_long(va_list *args)
+int		print_octal_ulong(va_list *args)
 {
 	char	*str;
 	int		ret;
 
-	str = ft_ltoa_base(va_arg(*args, long), 8, 0);
+	str = ft_ultoa_base(va_arg(*args, unsigned long), 8, 0);
 	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
 	return (ret);
 }
 
-int		print_char(va_list *args)
+int		print_char(va_list *args, t_param *p)
 {
+	if (p->lgt == 'l')
+		return (print_utfchar(args));
 	ft_putchar(va_arg(*args, int));
 	return (1);
 }

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   valid_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 15:03:25 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 18:49:17 by qhonore          ###   ########.fr       */
+/*   Created: 2016/09/20 18:07:07 by qhonore           #+#    #+#             */
+/*   Updated: 2016/09/20 19:19:31 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int		main(void)
+int		valid_arg(char c)
 {
-	printf("% Zooo", -9999);
-	return (0);
+	return (c == 'd' || c == 'D' || c == 'i' || c == 's' || c == 'S' || c == 'p'
+	|| c == 'o' || c == 'O' || c == 'x' || c == 'X' || c == 'u' || c == 'U'
+	|| c == 'c' || c == 'C' || c == '%');
+}
+
+int		valid_length(char c)
+{
+	return (c == 'h' || c == 'l' || c == 'j' || c == 'z');
+}
+
+int		valid_flag(char c)
+{
+	return (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ');
 }

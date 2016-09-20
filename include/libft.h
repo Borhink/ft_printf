@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 11:10:33 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 06:26:53 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/20 23:49:55 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ void			ft_putchar(char c);
 void			ft_putstr(char const *s);
 char			*ft_itoa(int n);
 char			*ft_ltoa(long nbr);
+char			*ft_lltoa(long long nbr);
 char			*ft_uitoa(unsigned int n);
 char			*ft_ultoa(unsigned long nbr);
+char			*ft_ulltoa(unsigned long long nbr);
 char			*ft_dtoa(double nbr, unsigned int acc);
 void			ft_putendl(char const *s);
 void			ft_putnbr(int n);
@@ -122,7 +124,9 @@ int				ft_dlstndel(t_dlist **dlst, size_t n, int dir);
 int				ft_free(void **mem);
 char			*ft_itoa_base(int value, int base, int upper);
 char			*ft_ltoa_base(long value, int base, int upper);
+char			*ft_lltoa_base(long long value, int base, int upper);
 char			*ft_uitoa_base(unsigned int value, int base, int upper);
 char			*ft_ultoa_base(unsigned long value, int base, int upper);
+char			*ft_ulltoa_base(unsigned long long value, int base, int upper);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 07:21:10 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/20 23:28:45 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	intlen(unsigned long nbr)
+static int	intlen(unsigned long long nbr)
 {
 	int		i;
 
@@ -29,9 +29,9 @@ static int	intlen(unsigned long nbr)
 
 char		*ft_uitoa(unsigned int nbr)
 {
-	char	*s;
-	int		i;
-	int		div;
+	char				*s;
+	int					i;
+	unsigned int		div;
 
 	div = 1;
 	i = intlen(nbr);
@@ -47,9 +47,27 @@ char		*ft_uitoa(unsigned int nbr)
 
 char		*ft_ultoa(unsigned long nbr)
 {
-	char	*s;
-	int		i;
-	long	div;
+	char			*s;
+	int				i;
+	unsigned long	div;
+
+	div = 1;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + 1));
+	s[i] = '\0';
+	while (--i >= 0)
+	{
+		s[i] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	return (s);
+}
+
+char		*ft_ulltoa(unsigned long long nbr)
+{
+	char				*s;
+	int					i;
+	unsigned long long	div;
 
 	div = 1;
 	i = intlen(nbr);
