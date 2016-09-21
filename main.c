@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 15:03:25 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 18:49:17 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 23:34:37 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 int		main(void)
 {
-	printf("% Zooo", -9999);
+	ft_printf("{% 0#-10d}", 42);
+	printf("\n");
+	// printf ("ret : %d\n", ft_printf("{%3c}", 0));
+	// printf("\n");
 	return (0);
 }

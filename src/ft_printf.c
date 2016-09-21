@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 15:26:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:18:11 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 23:36:53 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static int	print_arg(char type, va_list *args, t_param *p)
 	if (type == 'd' || type == 'i')
 		return (print_int(args, p));
 	if (type == 'D')
-		return (print_long(args));
+		return (print_long(args, p));
 	if (type == 's')
 		return (print_str(args, p));
 	if (type == 'S')
 		return (print_utfstr(args));
 	if (type == 'p')
-		return (print_ptr(args));
+		return (print_ptr(args, p));
 	if (type == 'o')
 		return (print_octal_uint(args, p));
 	if (type == 'O')
-		return (print_octal_ulong(args));
+		return (print_octal_ulong(args, p));
 	if (type == 'x')
 		return (print_hexa_uint(args, 0, p));
 	if (type == 'X')
@@ -35,7 +35,7 @@ static int	print_arg(char type, va_list *args, t_param *p)
 	if (type == 'u')
 		return (print_uint(args, p));
 	if (type == 'U')
-		return (print_ulong(args));
+		return (print_ulong(args, p));
 	if (type == 'c')
 		return (print_char(args, p));
 	if (type == 'C')
@@ -44,19 +44,40 @@ static int	print_arg(char type, va_list *args, t_param *p)
 	return (1);
 }
 
-static void	skip_spaces(char **tmp)
+// static void	skip_spaces(char **tmp)
+// {
+// 	(*tmp)++;
+// 	// if (**tmp == ' ')
+// 	// {
+// 		while (**tmp == ' ')
+// 			(*tmp)++;
+// 	// 	if (valid_arg(**tmp))
+// 	// 	{
+// 	// 		ft_putchar(' ');
+// 	// 		return (1);
+// 	// 	}
+// 	// }
+// }
+
+static int	parse_width_flag(char **tmp, t_param *p)
 {
-	(*tmp)++;
-	// if (**tmp == ' ')
-	// {
-		while (**tmp == ' ')
-			(*tmp)++;
-	// 	if (valid_arg(**tmp))
-	// 	{
-	// 		ft_putchar(' ');
-	// 		return (1);
-	// 	}
-	// }
+	int		i;
+
+	p->lwth = 0;
+	i = -1;
+	while (++i < 5)
+		p->flag[i] = 0;
+	while (valid_flag(**tmp))
+	{
+		p->flag[valid_flag(**tmp) - 1] = **tmp;
+		(*tmp)++;
+	}
+	while (ft_isdigit(**tmp))
+	{
+		p->lwth = p->lwth * 10 + (**tmp - '0');
+		(*tmp)++;
+	}
+	return (**tmp ? 1 : 0);
 }
 
 static int	parse_length(char **tmp, t_param *p)
@@ -84,8 +105,8 @@ static int	parse_arg(char **tmp, va_list *args)
 	t_param	p;
 
 	ret = 0;
-	skip_spaces(tmp);
-	if (!parse_length(tmp, &p))
+	(*tmp)++;
+	if (!parse_width_flag(tmp, &p) || !parse_length(tmp, &p))
 		return (ret);
 	ret = print_arg(**tmp, args, &p);
 	(*tmp)++;

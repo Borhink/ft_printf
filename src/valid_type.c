@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 18:07:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 19:19:31 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 23:19:13 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,15 @@ int		valid_length(char c)
 
 int		valid_flag(char c)
 {
-	return (c == '#' || c == '0' || c == '-' || c == '+' || c == ' ');
+	if (c == '#')
+		return (SHARP + 1);
+	if (c == '0')
+		return (ZERO + 1);
+	if (c == '-')
+		return (MIN + 1);
+	if (c == '+')
+		return (PLUS + 1);
+	if (c == ' ')
+		return (BLANK + 1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:18:10 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 23:13:53 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,31 @@
 
 #include <stdio.h>
 
+# define MIN 0
+# define PLUS 1
+# define BLANK 2
+# define SHARP 3
+# define ZERO 4
+
 typedef struct	s_param
 {
 	char	lgt;
+	char	flag[5];
+	int		lwth;
 }				t_param;
 
 int		ft_printf(const char *format, ...);
 int		print_nstr(const char *str, int n);
 int		print_int(va_list *args, t_param *p);
-int		print_long(va_list *args);
+int		print_long(va_list *args, t_param *p);
 int		print_uint(va_list *args, t_param *p);
-int		print_ulong(va_list *args);
+int		print_ulong(va_list *args, t_param *p);
 int		print_char(va_list *args, t_param *p);
 int		print_str(va_list *args, t_param *p);
-int		print_ptr(va_list *args);
+int		print_ptr(va_list *args, t_param *p);
 int		print_hexa_uint(va_list *args, int upper, t_param *p);
 int		print_octal_uint(va_list *args, t_param *p);
-int		print_octal_ulong(va_list *args);
+int		print_octal_ulong(va_list *args, t_param *p);
 int		utf_strlen(wchar_t *wstr);
 int		put_utfchar(wint_t c);
 int		print_utfstr(va_list *args);
