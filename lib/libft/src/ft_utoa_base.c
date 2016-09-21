@@ -6,13 +6,13 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 07:14:51 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:25:03 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 04:12:11 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_len(unsigned long long nb, int base)
+static int	ft_len(size_t nb, int base)
 {
 	int		len;
 
@@ -67,6 +67,54 @@ char		*ft_ultoa_base(unsigned long nb, int base, int upper)
 }
 
 char		*ft_ulltoa_base(unsigned long long nb, int base, int upper)
+{
+	char	*str;
+	int		len;
+
+	len = ft_len(nb, base);
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	str[len] = '\0';
+	while (--len >= 0)
+	{
+		str[len] = ft_char(nb % base, upper);
+		nb /= base;
+	}
+	return (str);
+}
+
+char		*ft_usitoa_base(unsigned short int nb, int base, int upper)
+{
+	char	*str;
+	int		len;
+
+	len = ft_len(nb, base);
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	str[len] = '\0';
+	while (--len >= 0)
+	{
+		str[len] = ft_char(nb % base, upper);
+		nb /= base;
+	}
+	return (str);
+}
+
+char		*ft_uctoa_base(unsigned char nb, int base, int upper)
+{
+	char	*str;
+	int		len;
+
+	len = ft_len(nb, base);
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	str[len] = '\0';
+	while (--len >= 0)
+	{
+		str[len] = ft_char(nb % base, upper);
+		nb /= base;
+	}
+	return (str);
+}
+
+char		*ft_uimtoa_base(uintmax_t nb, int base, int upper)
 {
 	char	*str;
 	int		len;

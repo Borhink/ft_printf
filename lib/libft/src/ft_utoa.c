@@ -6,13 +6,13 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:28:45 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 04:12:06 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	intlen(unsigned long long nbr)
+static int	intlen(size_t nbr)
 {
 	int		i;
 
@@ -68,6 +68,60 @@ char		*ft_ulltoa(unsigned long long nbr)
 	char				*s;
 	int					i;
 	unsigned long long	div;
+
+	div = 1;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + 1));
+	s[i] = '\0';
+	while (--i >= 0)
+	{
+		s[i] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	return (s);
+}
+
+char		*ft_uctoa(unsigned char nbr)
+{
+	char				*s;
+	int					i;
+	unsigned char		div;
+
+	div = 1;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + 1));
+	s[i] = '\0';
+	while (--i >= 0)
+	{
+		s[i] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	return (s);
+}
+
+char		*ft_usitoa(unsigned short int nbr)
+{
+	char					*s;
+	int						i;
+	unsigned short int		div;
+
+	div = 1;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + 1));
+	s[i] = '\0';
+	while (--i >= 0)
+	{
+		s[i] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	return (s);
+}
+
+char		*ft_uimtoa(uintmax_t nbr)
+{
+	char		*s;
+	int			i;
+	uintmax_t	div;
 
 	div = 1;
 	i = intlen(nbr);

@@ -6,13 +6,13 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:30:03 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 04:11:34 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	intlen(long long nbr)
+static int	intlen(size_t nbr)
 {
 	int		i;
 
@@ -102,26 +102,97 @@ char		*ft_lltoa(long long nbr)
 	return (s);
 }
 
-char		*ft_dtoa(double nbr, unsigned int acc)
+char		*ft_sctoa(signed char nbr)
+{
+	char			*s;
+	int				i;
+	int				neg;
+	signed char		div;
+
+	if (nbr == -128)
+		return (ft_strdup("-128"));
+	div = 1;
+	neg = nbr < 0 ? 1 : 0;
+	nbr = nbr < 0 ? -nbr : nbr;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + neg + 1));
+	s[i + neg] = '\0';
+	while (--i >= 0)
+	{
+		s[i + neg] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	if (neg)
+		s[0] = '-';
+	return (s);
+}
+
+char		*ft_sitoa(short int nbr)
+{
+	char			*s;
+	int				i;
+	int				neg;
+	short int		div;
+
+	if (nbr == -32768)
+		return (ft_strdup("-32768"));
+	div = 1;
+	neg = nbr < 0 ? 1 : 0;
+	nbr = nbr < 0 ? -nbr : nbr;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + neg + 1));
+	s[i + neg] = '\0';
+	while (--i >= 0)
+	{
+		s[i + neg] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	if (neg)
+		s[0] = '-';
+	return (s);
+}
+
+char		*ft_imtoa(intmax_t nbr)
+{
+	char		*s;
+	int			i;
+	int			neg;
+	intmax_t	div;
+
+	if (nbr == -9223372036854775807 - 1)
+		return (ft_strdup("-9223372036854775808"));
+	div = 1;
+	neg = nbr < 0 ? 1 : 0;
+	nbr = nbr < 0 ? -nbr : nbr;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + neg + 1));
+	s[i + neg] = '\0';
+	while (--i >= 0)
+	{
+		s[i + neg] = ((nbr / div) % 10) + '0';
+		div *= 10;
+	}
+	if (neg)
+		s[0] = '-';
+	return (s);
+}
+
+char		*ft_stoa(size_t nbr)
 {
 	char	*s;
-	char	*tmp;
+	int		i;
+	size_t	div;
 
-	if (nbr < 0.000000000000000001)
+	// if (nbr == -32768)
+	// 	return (ft_strdup("-32768"));
+	div = 1;
+	i = intlen(nbr);
+	s = (char*)malloc(sizeof(char) * (i + 1));
+	s[i] = '\0';
+	while (--i >= 0)
 	{
-		nbr = -nbr;
-		s = ft_strjoin(ft_ltoa((int)nbr), ".");
-		tmp = ft_strjoin("-", s);
-		if (s)
-			free(s);
+		s[i] = ((nbr / div) % 10) + '0';
+		div *= 10;
 	}
-	else
-		tmp = ft_strjoin(ft_ltoa((int)nbr), ".");
-	nbr = nbr - (int)nbr;
-	if (acc > 18)
-		acc = 18;
-	s = ft_strjoin(tmp, ft_ltoa((int)(nbr * ft_pow(10, acc))));
-	if (tmp)
-		free(tmp);
 	return (s);
 }

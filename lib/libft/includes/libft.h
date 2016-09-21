@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 11:10:33 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/20 23:50:09 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/21 03:53:50 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,6 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
-char			*ft_itoa(int n);
-char			*ft_ltoa(long nbr);
-char			*ft_lltoa(long long nbr);
-char			*ft_uitoa(unsigned int n);
-char			*ft_ultoa(unsigned long nbr);
-char			*ft_ulltoa(unsigned long long nbr);
-char			*ft_dtoa(double nbr, unsigned int acc);
 void			ft_putendl(char const *s);
 void			ft_putnbr(int n);
 void			ft_putchar_fd(char c, int fd);
@@ -122,11 +115,29 @@ void			ft_dlstaddend(t_dlist **dlst, t_dlist *new);
 size_t			ft_dlstgo(t_dlist **dlst, size_t n, int dir);
 int				ft_dlstndel(t_dlist **dlst, size_t n, int dir);
 int				ft_free(void **mem);
+char			*ft_itoa(int n);
+char			*ft_ltoa(long nbr);
+char			*ft_lltoa(long long nbr);
+char			*ft_sctoa(signed char nbr);
+char			*ft_sitoa(short int nbr);
+char			*ft_imtoa(intmax_t nbr);
+char			*ft_stoa(size_t nbr);
+char			*ft_uitoa(unsigned int n);
+char			*ft_ultoa(unsigned long nbr);
+char			*ft_ulltoa(unsigned long long nbr);
+char			*ft_uctoa(unsigned char nbr);
+char			*ft_usitoa(unsigned short int nbr);
+char			*ft_uimtoa(uintmax_t nbr);
 char			*ft_itoa_base(int value, int base, int upper);
 char			*ft_ltoa_base(long value, int base, int upper);
 char			*ft_lltoa_base(long long value, int base, int upper);
+char			*ft_imtoa_base(intmax_t nb, int base, int upper);
+char			*ft_stoa_base(size_t nb, int base, int upper);
 char			*ft_uitoa_base(unsigned int value, int base, int upper);
 char			*ft_ultoa_base(unsigned long value, int base, int upper);
 char			*ft_ulltoa_base(unsigned long long value, int base, int upper);
+char			*ft_usitoa_base(unsigned short int value, int base, int upper);
+char			*ft_uctoa_base(unsigned char value, int base, int upper);
+char			*ft_uimtoa_base(uintmax_t nb, int base, int upper);
 
 #endif
