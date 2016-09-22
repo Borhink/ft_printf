@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 15:26:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/21 23:36:53 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/22 09:54:58 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	print_arg(char type, va_list *args, t_param *p)
 {
+	p->type = type;
 	if (type == 'd' || type == 'i')
 		return (print_int(args, p));
 	if (type == 'D')
@@ -21,7 +22,7 @@ static int	print_arg(char type, va_list *args, t_param *p)
 	if (type == 's')
 		return (print_str(args, p));
 	if (type == 'S')
-		return (print_utfstr(args));
+		return (print_utfstr(args, p));
 	if (type == 'p')
 		return (print_ptr(args, p));
 	if (type == 'o')
@@ -39,7 +40,7 @@ static int	print_arg(char type, va_list *args, t_param *p)
 	if (type == 'c')
 		return (print_char(args, p));
 	if (type == 'C')
-		return (print_utfchar(args));
+		return (print_utfchar(args, p));
 	ft_putchar(type);
 	return (1);
 }
@@ -64,6 +65,7 @@ static int	parse_width_flag(char **tmp, t_param *p)
 	int		i;
 
 	p->lwth = 0;
+	p->neg = 0;
 	i = -1;
 	while (++i < 5)
 		p->flag[i] = 0;

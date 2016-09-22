@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/21 23:13:53 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/22 09:54:42 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 
 typedef struct	s_param
 {
+	int		type;
 	char	lgt;
 	char	flag[5];
 	int		lwth;
+	int		neg;
 }				t_param;
 
 int		ft_printf(const char *format, ...);
@@ -46,8 +48,9 @@ int		print_octal_uint(va_list *args, t_param *p);
 int		print_octal_ulong(va_list *args, t_param *p);
 int		utf_strlen(wchar_t *wstr);
 int		put_utfchar(wint_t c);
-int		print_utfstr(va_list *args);
-int		print_utfchar(va_list *args);
+int		print_utfstr(va_list *args, t_param *p);
+int		print_utfchar(va_list *args, t_param *p);
+int		put_blank(int len, t_param *p);
 
 int		valid_arg(char c);
 int		valid_length(char c);
