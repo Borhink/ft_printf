@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/22 09:54:42 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/22 21:19:44 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		utf_strlen(wchar_t *wstr);
 int		put_utfchar(wint_t c);
 int		print_utfstr(va_list *args, t_param *p);
 int		print_utfchar(va_list *args, t_param *p);
+int		print_blankchar(char c, t_param *p);
 int		put_blank(int len, t_param *p);
 
 int		valid_arg(char c);

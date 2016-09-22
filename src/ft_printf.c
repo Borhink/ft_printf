@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 15:26:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/22 09:54:58 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/22 21:20:28 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static int	print_arg(char type, va_list *args, t_param *p)
 		return (print_char(args, p));
 	if (type == 'C')
 		return (print_utfchar(args, p));
-	ft_putchar(type);
-	return (1);
+	return (print_blankchar(type, p));
 }
 
 // static void	skip_spaces(char **tmp)

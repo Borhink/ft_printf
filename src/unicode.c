@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/22 09:56:12 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 00:45:39 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,17 @@ int		put_blank(int len, t_param *p)
 {
 	int		ret;
 
+	// if (p->lwth < 1 && p->flag[BLANK] && valid_arg(p->type))
+	// {
+	// 	ft_putchar(' ');
+	// 	return (len - 1);
+	// }
 	p->lwth -= len;
 	ret = p->lwth > 0 ? p->lwth : 0;
 	while (p->lwth-- > 0)
 	{
-		if (p->flag[ZERO] && p->flag[BLANK] && !p->neg && p->type != 'p')
+		if (p->flag[ZERO] && p->flag[BLANK] && !p->flag[PLUS]
+			&& !p->neg && p->type != 'p')
 		{
 			p->flag[BLANK] = 0;
 			ft_putchar(' ');

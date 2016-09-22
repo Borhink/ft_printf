@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/22 10:04:22 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 00:02:57 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int		print_int(va_list *args, t_param *p)
 {
 	char	*str;
 	char	ret;
+	char	*tmp;
 
+	ret = 0;
 	if (p->lgt == 'l')
 		str = ft_ltoa(va_arg(*args, long));
 	else if (p->lgt == 'L')
@@ -45,14 +47,20 @@ int		print_int(va_list *args, t_param *p)
 		str = ft_stoa(va_arg(*args, size_t));
 	else
 		str = ft_itoa(va_arg(*args, int));
-	p->neg = (*str == '-' ? 1 : 0);
+	if (p->flag[PLUS] && *str != '-')
+	{
+		tmp = str;
+		str = ft_strjoin("+", str);
+		free(tmp);
+	}
+	p->neg = (*str == '-' || p->flag[PLUS] ? 1 : 0);
 	if (p->neg && p->flag[ZERO])
-		ft_putchar('-');
+		ft_putchar(*str);
 	if (!p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	p->neg && p->flag[ZERO] ? ft_putstr(str + 1) : ft_putstr(str);
 	if (p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
@@ -162,6 +170,7 @@ int		print_hexa_uint(va_list *args, int upper, t_param *p)
 	char	*str;
 	int		ret;
 
+	ret = 0;
 	if (p->lgt == 'l')
 		str = ft_ultoa_base(va_arg(*args, unsigned long), 16, upper);
 	else if (p->lgt == 'L')
@@ -178,9 +187,14 @@ int		print_hexa_uint(va_list *args, int upper, t_param *p)
 		str = ft_uitoa_base(va_arg(*args, unsigned int), 16, upper);
 	if (!p->flag[MIN])
 		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+	if (p->flag[SHARP] && *str != '0')
+	{
+		upper ? ft_putstr("0X") : ft_putstr("0x");
+		ret += 2;
+	}
 	ft_putstr(str);
 	if (p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
@@ -190,6 +204,7 @@ int		print_octal_uint(va_list *args, t_param *p)
 	char	*str;
 	int		ret;
 
+	ret = 0;
 	if (p->lgt == 'l')
 		str = ft_ultoa_base(va_arg(*args, unsigned long), 8, 0);
 	else if (p->lgt == 'L')
@@ -206,9 +221,14 @@ int		print_octal_uint(va_list *args, t_param *p)
 		str = ft_uitoa_base(va_arg(*args, unsigned int), 8, 0);
 	if (!p->flag[MIN])
 		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+	if (p->flag[SHARP] && *str != '0')
+	{
+		ft_putchar('0');
+		ret++;
+	}
 	ft_putstr(str);
 	if (p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
@@ -218,12 +238,18 @@ int		print_octal_ulong(va_list *args, t_param *p)
 	char	*str;
 	int		ret;
 
+	ret = 0;
 	str = ft_ultoa_base(va_arg(*args, unsigned long), 8, 0);
 	if (!p->flag[MIN])
 		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+	if (p->flag[SHARP] && *str != '0')
+	{
+		ft_putchar('0');
+		ret++;
+	}
 	ft_putstr(str);
 	if (p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
@@ -237,6 +263,18 @@ int		print_char(va_list *args, t_param *p)
 	if (!p->flag[MIN])
 		ret = put_blank(1, p) + 1;
 	ft_putchar(va_arg(*args, int));
+	if (p->flag[MIN])
+		ret = put_blank(1, p) + 1;
+	return (ret);
+}
+
+int		print_blankchar(char c, t_param *p)
+{
+	int		ret;
+
+	if (!p->flag[MIN])
+		ret = put_blank(1, p) + 1;
+	ft_putchar(c);
 	if (p->flag[MIN])
 		ret = put_blank(1, p) + 1;
 	return (ret);
