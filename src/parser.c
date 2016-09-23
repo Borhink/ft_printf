@@ -6,11 +6,24 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 04:57:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 05:00:24 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 08:17:55 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	parse_precision(char **tmp, t_param *p)
+{
+	p->prec = 0;
+	if (**tmp == '.')
+		(*tmp)++;
+	while (ft_isdigit(**tmp))
+	{
+		p->prec = p->prec * 10 + (**tmp - '0');
+		(*tmp)++;
+	}
+	return (**tmp ? 1 : 0);
+}
 
 static int	parse_width_flag(char **tmp, t_param *p)
 {
@@ -57,7 +70,8 @@ int			parse_arg(char **tmp, va_list *args)
 
 	ret = 0;
 	(*tmp)++;
-	if (!parse_width_flag(tmp, &p) || !parse_length(tmp, &p))
+	if (!parse_width_flag(tmp, &p) || !parse_length(tmp, &p)
+	|| !parse_precision(tmp, &p))
 		return (ret);
 	ret = print_arg(**tmp, args, &p);
 	(*tmp)++;

@@ -6,7 +6,7 @@
 #    By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:30:43 by qhonore           #+#    #+#              #
-#    Updated: 2016/09/20 23:47:31 by qhonore          ###   ########.fr        #
+#    Updated: 2016/09/23 08:45:47 by qhonore          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC_NAME = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 		   ft_abs.c ft_pow.c ft_strisnb.c get_next_line.c \
 		   ft_dlstnew.c ft_dlstadd.c ft_dlstaddend.c ft_dlstgo.c \
 		   ft_dlstndel.c ft_free.c ft_itoa_base.c ft_utoa.c \
-		   ft_utoa_base.c
+		   ft_utoa_base.c ft_utoa2.c ft_utoa_base2.c ft_itoa2.c \
+		   ft_itoa_base2.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 NAME = libft.a
 

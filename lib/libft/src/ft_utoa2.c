@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_utoa2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:40:58 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 08:40:46 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int	intlen(size_t nbr)
 	return (i);
 }
 
-char		*ft_uitoa(unsigned int nbr)
+char		*ft_uctoa(unsigned char nbr)
 {
 	char				*s;
 	int					i;
-	unsigned int		div;
+	unsigned char		div;
 
 	div = 1;
 	i = intlen(nbr);
@@ -45,11 +45,11 @@ char		*ft_uitoa(unsigned int nbr)
 	return (s);
 }
 
-char		*ft_ultoa(unsigned long nbr)
+char		*ft_usitoa(unsigned short int nbr)
 {
-	char			*s;
-	int				i;
-	unsigned long	div;
+	char					*s;
+	int						i;
+	unsigned short int		div;
 
 	div = 1;
 	i = intlen(nbr);
@@ -63,11 +63,11 @@ char		*ft_ultoa(unsigned long nbr)
 	return (s);
 }
 
-char		*ft_ulltoa(unsigned long long nbr)
+char		*ft_uimtoa(uintmax_t nbr)
 {
-	char				*s;
-	int					i;
-	unsigned long long	div;
+	char		*s;
+	int			i;
+	uintmax_t	div;
 
 	div = 1;
 	i = intlen(nbr);

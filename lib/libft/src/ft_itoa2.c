@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:43:36 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 08:43:57 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static int	intlen(size_t nbr)
 	return (i);
 }
 
-char		*ft_sctoa(signed char nbr)
+char		*ft_itoa(int nbr)
 {
-	char			*s;
-	int				i;
-	int				neg;
-	signed char		div;
+	char	*s;
+	int		i;
+	int		neg;
+	int		div;
 
-	if (nbr == -128)
-		return (ft_strdup("-128"));
+	if (nbr == -2147483648)
+		return (ft_strdup("-2147483648"));
 	div = 1;
 	neg = nbr < 0 ? 1 : 0;
 	nbr = nbr < 0 ? -nbr : nbr;
@@ -52,37 +52,12 @@ char		*ft_sctoa(signed char nbr)
 	return (s);
 }
 
-char		*ft_sitoa(short int nbr)
+char		*ft_ltoa(long nbr)
 {
-	char			*s;
-	int				i;
-	int				neg;
-	short int		div;
-
-	if (nbr == -32768)
-		return (ft_strdup("-32768"));
-	div = 1;
-	neg = nbr < 0 ? 1 : 0;
-	nbr = nbr < 0 ? -nbr : nbr;
-	i = intlen(nbr);
-	s = (char*)malloc(sizeof(char) * (i + neg + 1));
-	s[i + neg] = '\0';
-	while (--i >= 0)
-	{
-		s[i + neg] = ((nbr / div) % 10) + '0';
-		div *= 10;
-	}
-	if (neg)
-		s[0] = '-';
-	return (s);
-}
-
-char		*ft_imtoa(intmax_t nbr)
-{
-	char		*s;
-	int			i;
-	int			neg;
-	intmax_t	div;
+	char	*s;
+	int		i;
+	int		neg;
+	long	div;
 
 	if (nbr == -9223372036854775807 - 1)
 		return (ft_strdup("-9223372036854775808"));
@@ -102,22 +77,27 @@ char		*ft_imtoa(intmax_t nbr)
 	return (s);
 }
 
-char		*ft_stoa(size_t nbr)
+char		*ft_lltoa(long long nbr)
 {
-	char	*s;
-	int		i;
-	size_t	div;
+	char		*s;
+	int			i;
+	int			neg;
+	long long	div;
 
-	// if (nbr == -32768)
-	// 	return (ft_strdup("-32768"));
+	if (nbr == -9223372036854775807 - 1)
+		return (ft_strdup("-9223372036854775808"));
 	div = 1;
+	neg = nbr < 0 ? 1 : 0;
+	nbr = nbr < 0 ? -nbr : nbr;
 	i = intlen(nbr);
-	s = (char*)malloc(sizeof(char) * (i + 1));
-	s[i] = '\0';
+	s = (char*)malloc(sizeof(char) * (i + neg + 1));
+	s[i + neg] = '\0';
 	while (--i >= 0)
 	{
-		s[i] = ((nbr / div) % 10) + '0';
+		s[i + neg] = ((nbr / div) % 10) + '0';
 		div *= 10;
 	}
+	if (neg)
+		s[0] = '-';
 	return (s);
 }
