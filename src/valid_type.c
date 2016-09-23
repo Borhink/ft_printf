@@ -6,11 +6,16 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 18:07:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 00:16:24 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 00:57:50 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		valid_int(char c)
+{
+	return (c == 'd' || c == 'D' || c == 'i');
+}
 
 int		valid_arg(char c)
 {

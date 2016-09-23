@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qhonore <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 15:39:51 by qhonore           #+#    #+#             */
-/*   Updated: 2015/11/29 20:25:30 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 04:26:42 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,26 @@ static int	intlen(int n)
 	return (len);
 }
 
-static void	neg_to_pos(int *n)
+static int	neg_to_pos(int *n)
 {
 	if (*n < 0)
 	{
 		*n = -(*n);
-		ft_putchar('-');
+		return (ft_putchar('-'));
 	}
+	return (0);
 }
 
-void		ft_putnbr(int n)
+int			ft_putnbr(int n)
 {
+	int		ret;
 	int		len;
 	int		div;
 
 	div = 1;
 	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	neg_to_pos(&n);
+		return (write(1, "-2147483648", 11));
+	ret = neg_to_pos(&n);
 	len = intlen(n);
 	while (len--)
 		div *= 10;
@@ -53,5 +52,7 @@ void		ft_putnbr(int n)
 	{
 		ft_putchar((n / div) % 10 + 48);
 		div /= 10;
+		ret++;
 	}
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/22 21:19:44 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 05:02:32 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,30 @@ typedef struct	s_param
 }				t_param;
 
 int		ft_printf(const char *format, ...);
-int		print_nstr(const char *str, int n);
+int		parse_arg(char **tmp, va_list *args);
+int		print_arg(char type, va_list *args, t_param *p);
+
 int		print_int(va_list *args, t_param *p);
-int		print_long(va_list *args, t_param *p);
 int		print_uint(va_list *args, t_param *p);
-int		print_ulong(va_list *args, t_param *p);
 int		print_char(va_list *args, t_param *p);
 int		print_str(va_list *args, t_param *p);
+
 int		print_ptr(va_list *args, t_param *p);
 int		print_hexa_uint(va_list *args, int upper, t_param *p);
 int		print_octal_uint(va_list *args, t_param *p);
-int		print_octal_ulong(va_list *args, t_param *p);
-int		utf_strlen(wchar_t *wstr);
-int		put_utfchar(wint_t c);
-int		print_utfstr(va_list *args, t_param *p);
-int		print_utfchar(va_list *args, t_param *p);
+
+int		put_nstr(const char *str, int n);
 int		print_blankchar(char c, t_param *p);
 int		put_blank(int len, t_param *p);
+char	*strjoin_n_free(char *s1, char *s2);
 
+int		utf_strlen(wchar_t *wstr);
+int		put_utfchar(wint_t c);
+int		utfchar_len(wint_t c);
+int		print_utfstr(va_list *args, t_param *p);
+int		print_utfchar(va_list *args, t_param *p);
+
+int		valid_int(char c);
 int		valid_arg(char c);
 int		valid_length(char c);
 int		valid_flag(char c);

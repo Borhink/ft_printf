@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 11:10:33 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/21 03:54:03 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/23 04:27:41 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
-void			ft_putchar(char c);
-void			ft_putstr(char const *s);
+int				ft_putchar(char c);
+int				ft_putstr(char const *s);
 void			ft_putendl(char const *s);
-void			ft_putnbr(int n);
-void			ft_putchar_fd(char c, int fd);
-void			ft_putstr_fd(char const *s, int fd);
+int				ft_putnbr(int n);
+int				ft_putchar_fd(char c, int fd);
+int				ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
-void			ft_putnbr_fd(int n, int fd);
+int				ft_putnbr_fd(int n, int fd);
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));

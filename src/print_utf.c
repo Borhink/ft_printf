@@ -1,45 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_utf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 04:51:58 by qhonore          ###   ########.fr       */
+/*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
+/*   Updated: 2016/09/23 04:53:50 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_str(va_list *args, t_param *p)
+int		print_utfstr(va_list *args, t_param *p)
 {
-	char	*str;
+	wchar_t	*wstr;
 	int		ret;
+	int		i;
 
-	if (p->lgt == 'l')
-		return (print_utfstr(args, p));
-	str = va_arg(*args, char *);
-	if (!str)
+	wstr = va_arg(*args, wchar_t *);
+	ret = 0;
+	if (!wstr)
 		return (ft_putstr("(null)"));
+	i = 0;
 	if (!p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
-	ft_putstr(str);
+		ret += put_blank(utf_strlen(wstr), p);
+	while (wstr[i])
+		ret += put_utfchar(wstr[i++]);
 	if (p->flag[MIN])
-		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(utf_strlen(wstr), p);
 	return (ret);
 }
 
-int		print_char(va_list *args, t_param *p)
+int		print_utfchar(va_list *args, t_param *p)
 {
 	int		ret;
+	wint_t	wc;
 
-	if (p->lgt == 'l')
-		return (print_utfchar(args, p));
+	wc = va_arg(*args, wint_t);
+	ret = 0;
 	if (!p->flag[MIN])
-		ret = put_blank(1, p) + 1;
-	ft_putchar(va_arg(*args, int));
+		ret += put_blank(utfchar_len(wc), p);
+	ret += put_utfchar(wc);
 	if (p->flag[MIN])
-		ret = put_blank(1, p) + 1;
+		ret += put_blank(utfchar_len(wc), p);
 	return (ret);
 }
