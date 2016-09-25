@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 12:22:07 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:43:36 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 06:55:29 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ char		*ft_stoa(size_t nbr)
 	int		i;
 	size_t	div;
 
-	// if (nbr == -32768)
-	// 	return (ft_strdup("-32768"));
 	div = 1;
 	i = intlen(nbr);
 	s = (char*)malloc(sizeof(char) * (i + 1));

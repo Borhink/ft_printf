@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/25 02:05:30 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 05:26:27 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char			*strjoin_n_free(char *s1, char *s2);
 int				utf_strlen(wchar_t *wstr);
 int				put_utfchar(wint_t c);
 int				utfchar_len(wint_t c);
+wchar_t			*utf_strsub(wchar_t *wstr, unsigned int start, size_t len);
 int				print_utfstr(va_list *args, t_param *p);
 int				print_utfchar(va_list *args, t_param *p);
 

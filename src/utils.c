@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:01:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/25 02:05:00 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 07:03:30 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*adjust_prec(char *str, t_param *p)
 		ret[p->prec + len + sign] = '\0';
 		while (--len >= 0)
 			ret[i + len] = str[len + sign];
+		free(str);
 		return (ret);
 	}
 	else if (p->prec == 0 && *(str + sign) == '0')
