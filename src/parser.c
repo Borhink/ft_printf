@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 04:57:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:17:55 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 01:54:49 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 static int	parse_precision(char **tmp, t_param *p)
 {
-	p->prec = 0;
+	p->prec = -1;
 	if (**tmp == '.')
-		(*tmp)++;
-	while (ft_isdigit(**tmp))
 	{
-		p->prec = p->prec * 10 + (**tmp - '0');
 		(*tmp)++;
+		p->prec = 0;
+		while (ft_isdigit(**tmp))
+		{
+			p->prec = p->prec * 10 + (**tmp - '0');
+			(*tmp)++;
+		}
 	}
 	return (**tmp ? 1 : 0);
 }

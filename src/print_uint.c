@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 02:57:31 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 02:58:46 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 02:34:26 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		print_uint(va_list *args, t_param *p)
 		str = ft_stoa(va_arg(*args, size_t));
 	else
 		str = ft_uitoa(va_arg(*args, unsigned int));
+	str = adjust_prec(str, p);
 	if (!p->flag[MIN])
 		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
 	ft_putstr(str);

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:38:13 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 02:05:30 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <wchar.h>
 # include "libft.h"
 
-# include <stdio.h>
+#include <stdio.h>
 
 # define MIN 0
 # define PLUS 1
@@ -48,6 +48,7 @@ int				print_ptr(va_list *args, t_param *p);
 int				print_hexa_uint(va_list *args, int upper, t_param *p);
 int				print_octal_uint(va_list *args, t_param *p);
 
+char			*adjust_prec(char *str, t_param *p);
 int				put_nstr(const char *str, int n);
 int				print_blankchar(char c, t_param *p);
 int				put_blank(int len, t_param *p);

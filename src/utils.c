@@ -6,11 +6,39 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:01:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 04:07:15 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 02:05:00 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char	*adjust_prec(char *str, t_param *p)
+{
+	int		len;
+	int		sign;
+	char	*ret;
+	int		i;
+
+	sign = (*str == '+' || *str == '-' ? 1 : 0);
+	len = ft_strlen(str + sign);
+	if (p->prec > len)
+	{
+		ret = (char*)malloc(sizeof(char) * (p->prec + sign + 1));
+		if (sign)
+			*ret = *str;
+		p->prec -= len;
+		i = sign ? 0 : -1;
+		while (++i < p->prec + sign)
+			ret[i] = '0';
+		ret[p->prec + len + sign] = '\0';
+		while (--len >= 0)
+			ret[i + len] = str[len + sign];
+		return (ret);
+	}
+	else if (p->prec == 0 && *(str + sign) == '0')
+		*(str + sign) = '\0';
+	return (str);
+}
 
 int		put_nstr(const char *str, int n)
 {
@@ -40,7 +68,7 @@ int		put_blank(int len, t_param *p)
 	ret = p->lwth > 0 ? p->lwth : 0;
 	while (p->lwth-- > 0)
 	{
-		if (p->flag[ZERO] && p->flag[BLANK] && !p->flag[PLUS]
+		if (p->flag[BLANK] && !p->flag[PLUS]
 			&& !p->neg && p->type != 'p')
 		{
 			p->flag[BLANK] = 0;

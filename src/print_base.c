@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:25:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 07:17:05 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 02:05:39 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			print_ptr(va_list *args, t_param *p)
 	int		ret;
 
 	str = ft_ltoa_base(va_arg(*args, long), 16, 0);
+	str = adjust_prec(str, p);
 	str = strjoin_n_free("0x", str);
 	if (!p->flag[MIN] && !p->flag[ZERO])
 		ret = put_blank(ft_strlen(str), p) + ft_strlen(str);
@@ -53,6 +54,7 @@ int			print_hexa_uint(va_list *args, int upper, t_param *p)
 
 	ret = 0;
 	str = get_arg(args, p, 16, upper);
+	str = adjust_prec(str, p);
 	if (!p->flag[MIN])
 		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	if (p->flag[SHARP] && *str != '0')
@@ -71,6 +73,7 @@ int			print_octal_uint(va_list *args, t_param *p)
 
 	ret = 0;
 	str = get_arg(args, p, 8, 0);
+	str = adjust_prec(str, p);
 	if (!p->flag[MIN])
 		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
 	if (p->flag[SHARP] && *str != '0')

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 02:39:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 07:11:45 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/25 02:04:43 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			print_int(va_list *args, t_param *p)
 	if (p->flag[PLUS] && *str != '-')
 		str = strjoin_n_free("+", str);
 	p->neg = (*str == '-' ? 1 : 0);
+	str = adjust_prec(str, p);
 	if (*str == '0' && p->flag[MIN])
 		p->flag[ZERO] = 0;
 	if ((p->neg || p->flag[PLUS]) && p->flag[ZERO])
