@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:01:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 06:08:36 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 10:10:05 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		put_blank(int len, t_param *p)
 		ft_putchar(' ');
 		return (1);
 	}
+	if (p->flag[MIN])
+		p->flag[ZERO] = 0;
 	p->lwth -= len;
 	ret = p->lwth > 0 ? p->lwth : 0;
 	while (p->lwth-- > 0)

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 07:02:45 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 10:14:37 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdarg.h>
 # include <wchar.h>
 # include "libft.h"
-
-#include <stdio.h>
 
 # define MIN 0
 # define PLUS 1

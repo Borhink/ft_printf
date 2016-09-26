@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:25:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 06:53:21 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 10:05:28 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ int			print_hexa_uint(va_list *args, int upper, t_param *p)
 	zero = (*str == '0' ? 1 : 0);
 	ex = (p->flag[SHARP] && !zero ? 2 : 0);
 	str = adjust_prec(str, p);
-	if (!p->flag[MIN])
+	if (!p->flag[MIN] && !p->flag[ZERO])
 		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
 	if (ex)
 		ret += (upper ? ft_putstr("0X") : ft_putstr("0x"));
+	if (!p->flag[MIN] && p->flag[ZERO])
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
 	ft_putstr(str);
 	if (p->flag[MIN])
 		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
