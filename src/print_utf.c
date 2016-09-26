@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/25 06:51:11 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 03:32:24 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,17 @@ int		print_utfstr(va_list *args, t_param *p)
 	cut = 0;
 	wstr = va_arg(*args, wchar_t *);
 	ret = 0;
+	// if (!wstr)
+	// 	return (ft_putstr("(null)"));
 	if (!wstr)
-		return (ft_putstr("(null)"));
+	{
+		if (p->lwth < 1)
+			return (ft_putstr("(null)"));
+		ret = p->lwth;
+		while (--p->lwth >= 0)
+			ft_putchar('0');
+		return (ret);
+	}
 	i = 0;
 	if (p->prec >= 0 && p->prec < utf_strlen(wstr))
 	{

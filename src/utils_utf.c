@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:04:27 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/25 06:55:56 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 03:44:51 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,20 @@ wchar_t	*utf_strsub(wchar_t *wstr, unsigned int start, size_t len)
 {
 	size_t	i;
 	wchar_t	*str;
+	size_t	j;
 
 	i = 0;
+	j = 0;
 	if (!wstr)
 		return (NULL);
 	str = (wchar_t*)malloc(sizeof(wint_t) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (i <= len)
+	while (j + utfchar_len(wstr[start + i]) <= len)
 	{
-		if (i + utfchar_len(wstr[start + i]) <= len)
-		{
-			str[i] = wstr[start + i];
-			i += utfchar_len(wstr[start + i]);
-		}
-		else
-		{
-			str[i] = '\0';
-			i++;
-		}
+		str[i] = wstr[start + i];
+		i++;
+		j += utfchar_len(wstr[start + i]);
 	}
 	str[i] = '\0';
 	return (str);
