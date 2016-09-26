@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 07:00:47 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:43:51 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			print_utfstr(va_list *args, t_param *p)
 	int		cut;
 
 	cut = 0;
+	get_wild_arg(args, p);
 	wstr = va_arg(*args, wchar_t *);
 	ret = 0;
 	if (!wstr)
@@ -58,6 +59,7 @@ int			print_utfchar(va_list *args, t_param *p)
 	int		ret;
 	wint_t	wc;
 
+	get_wild_arg(args, p);
 	wc = va_arg(*args, wint_t);
 	ret = 0;
 	if (!p->flag[MIN])

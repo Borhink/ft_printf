@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:25:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 10:05:28 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:43:01 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*get_arg(va_list *args, t_param *p, int base, int upper)
 {
+	get_wild_arg(args, p);
 	if (p->lgt == 'l')
 		return (ft_ultoa_base(va_arg(*args, unsigned long), base, upper));
 	else if (p->lgt == 'L')
@@ -35,6 +36,7 @@ int			print_ptr(va_list *args, t_param *p)
 	char	*str;
 	int		ret;
 
+	get_wild_arg(args, p);
 	str = ft_ltoa_base(va_arg(*args, long), 16, 0);
 	str = adjust_prec(str, p);
 	str = strjoin_n_free("0x", str);

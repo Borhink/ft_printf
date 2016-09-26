@@ -6,11 +6,30 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:01:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 10:10:05 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:42:13 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	get_wild_arg(va_list *args, t_param *p)
+{
+	int		tmp;
+
+	if (p->flag[WILD])
+	{
+		tmp = va_arg(*args, int);
+		if (tmp < 0)
+		{
+			tmp = -tmp;
+			p->flag[MIN] = 1;
+		}
+		if (tmp > p->lwth)
+			p->lwth = tmp;
+	}
+	if (p->flag[PWILD])
+		p->prec = va_arg(*args, int);
+}
 
 char	*adjust_prec(char *str, t_param *p)
 {

@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 04:57:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 03:37:04 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:41:28 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static int	parse_precision(char **tmp, t_param *p)
 	{
 		(*tmp)++;
 		p->prec = 0;
-		while (ft_isdigit(**tmp))
+		while (ft_isdigit(**tmp) || **tmp == '*')
 		{
-			p->prec = p->prec * 10 + (**tmp - '0');
+			if (**tmp == '*')
+				p->flag[PWILD] = 1;
+			else
+				p->prec = p->prec * 10 + (**tmp - '0');
 			(*tmp)++;
 		}
 	}
@@ -35,16 +38,22 @@ static int	parse_width_flag(char **tmp, t_param *p)
 	p->lwth = 0;
 	p->neg = 0;
 	i = -1;
-	while (++i < 5)
+	while (++i < 7)
 		p->flag[i] = 0;
-	while (valid_flag(**tmp))
+	while (valid_flag(**tmp) || **tmp == '*')
 	{
-		p->flag[valid_flag(**tmp) - 1] = **tmp;
+		if (**tmp == '*')
+			p->flag[WILD] = 1;
+		else
+			p->flag[valid_flag(**tmp) - 1] = **tmp;
 		(*tmp)++;
 	}
-	while (ft_isdigit(**tmp))
+	while (ft_isdigit(**tmp) || **tmp == '*')
 	{
-		p->lwth = p->lwth * 10 + (**tmp - '0');
+		if (**tmp == '*'/* && !p->lwth*/)
+			p->flag[WILD] = 1;
+		else// if (!p->flag[WILD])
+			p->lwth = p->lwth * 10 + (**tmp - '0');
 		(*tmp)++;
 	}
 	return (**tmp ? 1 : 0);

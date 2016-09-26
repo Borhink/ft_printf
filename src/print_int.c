@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 02:39:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 10:12:31 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:11:41 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*get_arg(va_list *args, t_param *p)
 {
+	get_wild_arg(args, p);
 	if (p->lgt == 'l')
 		return (ft_ltoa(va_arg(*args, long)));
 	else if (p->lgt == 'L')

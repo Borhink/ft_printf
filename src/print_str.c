@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 07:02:31 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 00:22:48 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	print_nullstr(t_param *p)
 {
 	int		ret;
 
-	if (p->lwth < 1)
+	if (p->lwth < 1 || p->flag[WILD])
 		return (ft_putstr("(null)"));
 	ret = p->lwth;
 	while (--p->lwth >= 0)
@@ -33,6 +33,7 @@ int			print_str(va_list *args, t_param *p)
 	cut = 0;
 	if (p->lgt == 'l')
 		return (print_utfstr(args, p));
+	get_wild_arg(args, p);
 	str = va_arg(*args, char *);
 	if (!str)
 		return (print_nullstr(p));
@@ -59,6 +60,7 @@ int			print_char(va_list *args, t_param *p)
 		return (print_utfchar(args, p));
 	if (!p->flag[MIN])
 		ret = put_blank(1, p) + 1;
+	get_wild_arg(args, p);
 	ft_putchar(va_arg(*args, int));
 	if (p->flag[MIN])
 		ret = put_blank(1, p) + 1;
