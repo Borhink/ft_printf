@@ -6,13 +6,25 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 03:32:27 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 07:02:31 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_str(va_list *args, t_param *p)
+static int	print_nullstr(t_param *p)
+{
+	int		ret;
+
+	if (p->lwth < 1)
+		return (ft_putstr("(null)"));
+	ret = p->lwth;
+	while (--p->lwth >= 0)
+		ft_putchar('0');
+	return (ret);
+}
+
+int			print_str(va_list *args, t_param *p)
 {
 	char	*str;
 	int		ret;
@@ -23,14 +35,7 @@ int		print_str(va_list *args, t_param *p)
 		return (print_utfstr(args, p));
 	str = va_arg(*args, char *);
 	if (!str)
-	{
-		if (p->lwth < 1)
-			return (ft_putstr("(null)"));
-		ret = p->lwth;
-		while (--p->lwth >= 0)
-			ft_putchar('0');
-		return (ret);
-	}
+		return (print_nullstr(p));
 	if (p->prec >= 0 && (size_t)p->prec < ft_strlen(str))
 	{
 		str = ft_strsub(str, 0, p->prec);
@@ -46,7 +51,7 @@ int		print_str(va_list *args, t_param *p)
 	return (ret);
 }
 
-int		print_char(va_list *args, t_param *p)
+int			print_char(va_list *args, t_param *p)
 {
 	int		ret;
 

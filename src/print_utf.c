@@ -6,13 +6,25 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 03:32:24 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 07:00:47 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_utfstr(va_list *args, t_param *p)
+static int	print_nullwstr(t_param *p)
+{
+	int		ret;
+
+	if (p->lwth < 1)
+		return (ft_putstr("(null)"));
+	ret = p->lwth;
+	while (--p->lwth >= 0)
+		ft_putchar('0');
+	return (ret);
+}
+
+int			print_utfstr(va_list *args, t_param *p)
 {
 	wchar_t	*wstr;
 	int		ret;
@@ -22,17 +34,8 @@ int		print_utfstr(va_list *args, t_param *p)
 	cut = 0;
 	wstr = va_arg(*args, wchar_t *);
 	ret = 0;
-	// if (!wstr)
-	// 	return (ft_putstr("(null)"));
 	if (!wstr)
-	{
-		if (p->lwth < 1)
-			return (ft_putstr("(null)"));
-		ret = p->lwth;
-		while (--p->lwth >= 0)
-			ft_putchar('0');
-		return (ret);
-	}
+		return (print_nullwstr(p));
 	i = 0;
 	if (p->prec >= 0 && p->prec < utf_strlen(wstr))
 	{
@@ -50,7 +53,7 @@ int		print_utfstr(va_list *args, t_param *p)
 	return (ret);
 }
 
-int		print_utfchar(va_list *args, t_param *p)
+int			print_utfchar(va_list *args, t_param *p)
 {
 	int		ret;
 	wint_t	wc;

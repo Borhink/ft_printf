@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:25:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/26 03:24:01 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/26 06:53:21 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,20 @@ int			print_hexa_uint(va_list *args, int upper, t_param *p)
 	char	*str;
 	int		ret;
 	int		zero;
+	int		ex;
 
 	ret = 0;
 	str = get_arg(args, p, 16, upper);
 	zero = (*str == '0' ? 1 : 0);
+	ex = (p->flag[SHARP] && !zero ? 2 : 0);
 	str = adjust_prec(str, p);
 	if (!p->flag[MIN])
-		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
-	if (p->flag[SHARP] && !zero)
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
+	if (ex)
 		ret += (upper ? ft_putstr("0X") : ft_putstr("0x"));
 	ft_putstr(str);
 	if (p->flag[MIN])
-		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
@@ -73,18 +75,20 @@ int			print_octal_uint(va_list *args, t_param *p)
 	char	*str;
 	int		ret;
 	int		zero;
+	int		ex;
 
 	ret = 0;
 	str = get_arg(args, p, 8, 0);
 	zero = (*str == '0' ? 1 : 0);
+	ex = (p->flag[SHARP] && p->prec < 1 && (!zero || !p->prec) ? 1 : 0);
 	str = adjust_prec(str, p);
 	if (!p->flag[MIN])
-		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
-	if (p->flag[SHARP] && (!zero || !p->prec))
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
+	if (ex)
 		ret += ft_putchar('0');
 	ft_putstr(str);
 	if (p->flag[MIN])
-		ret += put_blank(ft_strlen(str), p) + ft_strlen(str);
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
 	free(str);
 	return (ret);
 }
