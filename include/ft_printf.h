@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 03:58:07 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:15:25 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 # define WILD 5
 # define PWILD 6
 
+# define BLACK "\033[30m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define PURPLE "\033[35m"
+# define CYAN "\033[36m"
+# define GREY "\033[1;30m"
+# define PINK "\033[1;35m"
+# define EOC "\033[0m"
+
 typedef struct	s_param
 {
 	int		type;
@@ -37,6 +48,7 @@ typedef struct	s_param
 
 int				ft_printf(const char *format, ...);
 int				parse_arg(char **tmp, va_list *args);
+int				parse_color(const char *str, const char *max, int *len);
 int				print_arg(char type, va_list *args, t_param *p);
 
 int				print_int(va_list *args, t_param *p);

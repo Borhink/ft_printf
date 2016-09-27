@@ -6,7 +6,7 @@
 #    By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 16:05:27 by qhonore           #+#    #+#              #
-#    Updated: 2016/09/23 05:02:49 by qhonore          ###   ########.fr        #
+#    Updated: 2016/09/27 08:01:52 by qhonore          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB_PATH = ./lib/
 
 SRC_NAME = ft_printf.c print_str.c print_utf.c valid_type.c \
 		   print_int.c print_uint.c utils.c utils_utf.c \
-		   print_base.c parser.c print_arg.c
+		   print_base.c parser.c print_arg.c color.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = -lft
 NAME = libftprintf.a

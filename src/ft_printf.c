@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 15:26:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 08:36:01 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 08:02:10 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@ static int	print_format(const char *format, va_list *args, int ret)
 	char	*tmp;
 	int		i;
 	int		len;
+	int		j;
 
 	if (!(*format))
 		return (ret);
+	len = 0;
 	if ((tmp = ft_strchr(format, '%')))
 	{
 		i = tmp - format;
-		len = put_nstr(format, i);
+		if ((j = parse_color(format, tmp, &len)))
+			return (print_format(format + j, args, ret + len));
+		len += put_nstr(format, i);
 		len += parse_arg(&tmp, args);
 		return (print_format(tmp, args, ret + len));
 	}
+	if ((j = parse_color(format, format + ft_strlen(format), &len)))
+		return (print_format(format + j, args, ret + len));
 	ft_putstr(format);
 	ret += ft_strlen(format);
 	return (ret);
