@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 04:57:37 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 03:18:09 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 11:51:50 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,13 @@ static int	parse_length(char **tmp, t_param *p)
 	return (**tmp ? 1 : 0);
 }
 
-int			parse_arg(char **tmp, va_list *args)
+int			parse_arg(char **tmp, va_list *args, int g_ret)
 {
 	int		ret;
 	t_param	p;
 
 	ret = 0;
+	p.ret = g_ret;
 	(*tmp)++;
 	if (!parse_width_flag(tmp, &p) || !parse_length(tmp, &p)
 	|| !parse_precision(tmp, &p))

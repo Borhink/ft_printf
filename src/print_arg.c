@@ -6,11 +6,20 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 05:00:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/23 05:02:40 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 13:04:33 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	n_arg(va_list *args, t_param *p)
+{
+	int		*var;
+
+	var = va_arg(*args, int*);
+	*var = p->ret;
+	return (0);
+}
 
 static int	print_arg2(char type, va_list *args, t_param *p)
 {
@@ -29,6 +38,12 @@ static int	print_arg2(char type, va_list *args, t_param *p)
 		return (print_char(args, p));
 	if (type == 'C')
 		return (print_utfchar(args, p));
+	if (type == 'n')
+		return (n_arg(args, p));
+	if (type == 'b')
+		return (print_base_uint(args, p));
+	if (type == 'r')
+		return (print_file(args));
 	return (print_blankchar(type, p));
 }
 

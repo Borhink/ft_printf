@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 08:15:25 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 13:04:48 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ typedef struct	s_param
 	int		lwth;
 	int		neg;
 	int		prec;
+	int		ret;
 }				t_param;
 
 int				ft_printf(const char *format, ...);
-int				parse_arg(char **tmp, va_list *args);
+int				parse_arg(char **tmp, va_list *args, int g_ret);
 int				parse_color(const char *str, const char *max, int *len);
 int				print_arg(char type, va_list *args, t_param *p);
 
@@ -55,10 +56,12 @@ int				print_int(va_list *args, t_param *p);
 int				print_uint(va_list *args, t_param *p);
 int				print_char(va_list *args, t_param *p);
 int				print_str(va_list *args, t_param *p);
+int				print_file(va_list *args);
 
 int				print_ptr(va_list *args, t_param *p);
 int				print_hexa_uint(va_list *args, int upper, t_param *p);
 int				print_octal_uint(va_list *args, t_param *p);
+int				print_base_uint(va_list *args, t_param *p);
 
 void			get_wild_arg(va_list *args, t_param *p);
 char			*adjust_prec(char *str, t_param *p);

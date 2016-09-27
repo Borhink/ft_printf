@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 03:19:40 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 13:11:00 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,26 @@ int			print_char(va_list *args, t_param *p)
 	ft_putchar(va_arg(*args, int));
 	if (p->flag[MIN])
 		ret = put_blank(1, p) + 1;
+	return (ret);
+}
+
+int			print_file(va_list *args)
+{
+	char	*line;
+	int		ret;
+	int		fd;
+
+	ret = 0;
+	if ((fd = open(va_arg(*args, char*), O_RDONLY)) > 0)
+	{
+		while (get_next_line(fd, &line) > 0)
+		{
+			ret += ft_putstr(line);
+			ret += ft_putchar('\n');
+			if (line)
+				free(line);
+		}
+		close(fd);
+	}
 	return (ret);
 }

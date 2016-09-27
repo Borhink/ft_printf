@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:25:32 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 00:43:01 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 12:12:09 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 static char	*get_arg(va_list *args, t_param *p, int base, int upper)
 {
 	get_wild_arg(args, p);
+	if (base == -1)
+		base = va_arg(*args, int);
+	if (base < 2 || base > 16)
+		base = 10;
 	if (p->lgt == 'l')
 		return (ft_ultoa_base(va_arg(*args, unsigned long), base, upper));
 	else if (p->lgt == 'L')
@@ -83,6 +87,29 @@ int			print_octal_uint(va_list *args, t_param *p)
 
 	ret = 0;
 	str = get_arg(args, p, 8, 0);
+	zero = (*str == '0' ? 1 : 0);
+	ex = (p->flag[SHARP] && p->prec < 1 && (!zero || !p->prec) ? 1 : 0);
+	str = adjust_prec(str, p);
+	if (!p->flag[MIN])
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
+	if (ex)
+		ret += ft_putchar('0');
+	ft_putstr(str);
+	if (p->flag[MIN])
+		ret += put_blank(ft_strlen(str) + ex, p) + ft_strlen(str);
+	free(str);
+	return (ret);
+}
+
+int			print_base_uint(va_list *args, t_param *p)
+{
+	char	*str;
+	int		ret;
+	int		zero;
+	int		ex;
+
+	ret = 0;
+	str = get_arg(args, p, -1, 0);
 	zero = (*str == '0' ? 1 : 0);
 	ex = (p->flag[SHARP] && p->prec < 1 && (!zero || !p->prec) ? 1 : 0);
 	str = adjust_prec(str, p);
