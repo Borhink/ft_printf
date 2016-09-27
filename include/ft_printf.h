@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:40:42 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 00:44:13 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 03:58:07 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				print_ptr(va_list *args, t_param *p);
 int				print_hexa_uint(va_list *args, int upper, t_param *p);
 int				print_octal_uint(va_list *args, t_param *p);
 
-void 			get_wild_arg(va_list *args, t_param *p);
+void			get_wild_arg(va_list *args, t_param *p);
 char			*adjust_prec(char *str, t_param *p);
 int				put_nstr(const char *str, int n);
 int				print_blankchar(char c, t_param *p);

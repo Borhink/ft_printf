@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/23 03:01:06 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 00:42:13 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 03:19:15 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ void	get_wild_arg(va_list *args, t_param *p)
 	if (p->flag[WILD])
 	{
 		tmp = va_arg(*args, int);
-		if (tmp < 0)
+		if (p->flag[WILD] != -1)
 		{
-			tmp = -tmp;
-			p->flag[MIN] = 1;
+			if (tmp < 0)
+			{
+				tmp = -tmp;
+				p->flag[MIN] = 1;
+			}
+			if (tmp > p->lwth)
+				p->lwth = tmp;
 		}
-		if (tmp > p->lwth)
-			p->lwth = tmp;
 	}
 	if (p->flag[PWILD])
 		p->prec = va_arg(*args, int);
@@ -99,18 +102,6 @@ int		put_blank(int len, t_param *p)
 		else
 			ft_putchar(p->flag[ZERO] ? '0' : ' ');
 	}
-	return (ret);
-}
-
-int		print_blankchar(char c, t_param *p)
-{
-	int		ret;
-
-	if (!p->flag[MIN])
-		ret = put_blank(1, p) + 1;
-	ft_putchar(c);
-	if (p->flag[MIN])
-		ret = put_blank(1, p) + 1;
 	return (ret);
 }
 

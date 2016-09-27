@@ -6,11 +6,23 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/04 17:25:05 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 00:22:48 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 03:19:40 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int			print_blankchar(char c, t_param *p)
+{
+	int		ret;
+
+	if (!p->flag[MIN])
+		ret = put_blank(1, p) + 1;
+	ft_putchar(c);
+	if (p->flag[MIN])
+		ret = put_blank(1, p) + 1;
+	return (ret);
+}
 
 static int	print_nullstr(t_param *p)
 {

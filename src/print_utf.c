@@ -6,7 +6,7 @@
 /*   By: qhonore <qhonore@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 02:16:30 by qhonore           #+#    #+#             */
-/*   Updated: 2016/09/27 00:43:51 by qhonore          ###   ########.fr       */
+/*   Updated: 2016/09/27 03:25:26 by qhonore          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,15 @@ static int	print_nullwstr(t_param *p)
 	return (ret);
 }
 
-int			print_utfstr(va_list *args, t_param *p)
+static int	put_utfstr(t_param *p, wchar_t *wstr)
 {
-	wchar_t	*wstr;
-	int		ret;
 	int		i;
 	int		cut;
+	int		ret;
 
 	cut = 0;
-	get_wild_arg(args, p);
-	wstr = va_arg(*args, wchar_t *);
-	ret = 0;
-	if (!wstr)
-		return (print_nullwstr(p));
 	i = 0;
+	ret = 0;
 	if (p->prec >= 0 && p->prec < utf_strlen(wstr))
 	{
 		wstr = utf_strsub(wstr, 0, p->prec);
@@ -51,6 +46,19 @@ int			print_utfstr(va_list *args, t_param *p)
 		ret += put_blank(utf_strlen(wstr), p);
 	if (cut && wstr)
 		free(wstr);
+	return (ret);
+}
+
+int			print_utfstr(va_list *args, t_param *p)
+{
+	wchar_t	*wstr;
+	int		ret;
+
+	get_wild_arg(args, p);
+	wstr = va_arg(*args, wchar_t *);
+	if (!wstr)
+		return (print_nullwstr(p));
+	ret = put_utfstr(p, wstr);
 	return (ret);
 }
 
